@@ -3,6 +3,27 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
+const CURRENT_HOST = "print.shuttlelab.org";
+const SIBLING_SITES: { name: string; host: string; featured?: boolean }[] = [
+  { name: "Note Shuttle", host: "note.shuttlelab.org", featured: true },
+  { name: "Status Shuttle", host: "status.shuttlelab.org", featured: true },
+  { name: "Clipboard Shuttle", host: "clipboard.shuttlelab.org" },
+  { name: "File Shuttle", host: "file.shuttlelab.org" },
+  { name: "JSON Shuttle", host: "json.shuttlelab.org" },
+  { name: "YAML Shuttle", host: "yaml.shuttlelab.org" },
+  { name: "Message Shuttle", host: "msg.shuttlelab.org" },
+  { name: "Calendar Shuttle", host: "calendar.shuttlelab.org" },
+  { name: "Docx Shuttle", host: "docx.shuttlelab.org" },
+  { name: "Image Shuttle", host: "image.shuttlelab.org" },
+  { name: "PDF Shuttle", host: "pdf.shuttlelab.org" },
+  { name: "Diff Shuttle", host: "diff.shuttlelab.org" },
+  { name: "QR Shuttle", host: "qr.shuttlelab.org" },
+  { name: "Base64 Shuttle", host: "base64.shuttlelab.org" },
+  { name: "URL Shuttle", host: "url.shuttlelab.org" },
+  { name: "Regex Shuttle", host: "regex.shuttlelab.org" },
+  { name: "Time Shuttle", host: "time.shuttlelab.org" },
+];
+
 export default function Footer() {
   const t = useTranslations();
 
@@ -36,32 +57,23 @@ export default function Footer() {
               {t("common.paperStudioCredit")} {t("common.paperStudioCreditLink")}
             </a>
           </p>
-          <p className="flex items-center gap-2 flex-wrap justify-center">
-            <span className="text-muted-foreground">{t("common.alsoFrom")}:</span>
-            <a
-              href="https://note.shuttlelab.org"
-              target="_blank"
-              rel="noopener"
-              className="font-semibold text-foreground hover:text-primary transition-colors"
-            >
-              Note Shuttle
-            </a>
-            <span className="text-muted-foreground text-xs">
-              {t("common.notePromoDesc")}
-            </span>
-            <span className="text-muted-foreground/30">|</span>
-            <a
-              href="https://status.shuttlelab.org"
-              target="_blank"
-              rel="noopener"
-              className="font-semibold text-foreground hover:text-primary transition-colors"
-            >
-              Status Shuttle
-            </a>
-            <span className="text-muted-foreground text-xs">
-              {t("common.statusPromoDesc")}
-            </span>
-          </p>
+          <div className="flex flex-col items-center gap-1.5 pt-1">
+            <span className="text-xs uppercase tracking-wider text-muted-foreground/70">{t("common.alsoFrom")}</span>
+            <div className="flex items-center gap-x-2 gap-y-1 flex-wrap justify-center max-w-3xl">
+              {SIBLING_SITES.filter((s) => s.host !== CURRENT_HOST).map((s, idx, arr) => (
+                <span key={s.host} className="flex items-center gap-x-2">
+                  <a
+                    href={`https://${s.host}`}
+                    rel="noopener"
+                    className={s.featured ? "font-semibold text-foreground hover:text-primary transition-colors" : "hover:text-foreground transition-colors"}
+                  >
+                    {s.name}
+                  </a>
+                  {idx < arr.length - 1 && <span className="text-muted-foreground/30">·</span>}
+                </span>
+              ))}
+            </div>
+          </div>
           <p>&copy; {new Date().getFullYear()} <Link href="/">&nbsp;{t("common.allName")}</Link>. All rights reserved.</p>
         </div>
       </div>
