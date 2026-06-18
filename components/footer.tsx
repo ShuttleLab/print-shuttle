@@ -12,7 +12,6 @@ const SIBLING_SITES: { name: string; host: string; featured?: boolean }[] = [
   { name: "JSON Shuttle", host: "json.shuttlelab.org" },
   { name: "YAML Shuttle", host: "yaml.shuttlelab.org" },
   { name: "Message Shuttle", host: "msg.shuttlelab.org" },
-  { name: "Calendar Shuttle", host: "calendar.shuttlelab.org" },
   { name: "Docx Shuttle", host: "docx.shuttlelab.org" },
   { name: "Image Shuttle", host: "image.shuttlelab.org" },
   { name: "PDF Shuttle", host: "pdf.shuttlelab.org" },
