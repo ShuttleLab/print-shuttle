@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 
 const CURRENT_HOST = "print.shuttlelab.org";
 const SIBLING_SITES: { name: string; host: string; featured?: boolean }[] = [
+  { name: "PPT Shuttle", host: "ppt.shuttlelab.org", featured: true },
   { name: "Note Shuttle", host: "note.shuttlelab.org", featured: true },
   { name: "Status Shuttle", host: "status.shuttlelab.org", featured: true },
   { name: "Clipboard Shuttle", host: "clipboard.shuttlelab.org" },
