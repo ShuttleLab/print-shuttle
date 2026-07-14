@@ -2,6 +2,8 @@
 
 Free browser-based visual print layout and batch printing designer. Design certificates, labels, name badges, and letterhead with a Fabric.js canvas editor, import Excel data for batch generation, and export as PDF. Supports 40 barcode formats, 12 built-in templates, and custom paper sizes. Everything runs in the browser; no data is sent to any server.
 
+**🔗 Try it live: [Browser-based print layout & batch printing](https://print.shuttlelab.org)** — design certificates, labels & badges, then batch-print from Excel, all in your browser.
+
 ## Features
 
 - **Visual Canvas Editor** — Drag-and-drop Fabric.js canvas with full layer management, vector shapes (rectangles, circles, polygons, lines), a built-in table editor with cell merge/split, and local font support via the browser's Local Font Access API
