@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
-import { ToolThinPage } from "@/components/tool-thin-page";
 import { GraphPaperTool } from "@/components/graph-paper/graph-paper-tool";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -88,25 +87,40 @@ const breadcrumbSchema = {
 export default async function GraphPaperMakerPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  if (locale === "zh") {
-    return <ToolThinPage slug="graph-paper-maker" />;
-  }
+  const isZh = locale === "zh";
+  const t = await getTranslations({ locale, namespace: "toolPages" });
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(techArticleSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <article className="max-w-6xl mx-auto px-4 py-12 sm:px-6 lg:px-8 prose prose-slate dark:prose-invert">
-        <h1>Printable Graph Paper Maker — Free Grid, Dot &amp; Isometric Paper</h1>
-        <p className="lead">
-          Generate and print custom graph paper directly in your browser. Choose from a dozen grid types — square, dot, isometric, hexagonal, polar, semi-log, music, and more — set any paper size, spacing, line width, and colour, then export as PDF, SVG, or PNG. Free, privacy-first, no account required.
-        </p>
+      {!isZh && (
+        <>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(techArticleSchema) }} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+        </>
+      )}
+
+      {/* Wide tool area — the interactive generator is the primary content */}
+      <div className="mx-auto w-full max-w-[1600px] px-4 py-10 sm:px-6 lg:px-8">
+        <header className="mb-8 max-w-4xl">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{t("graphPaperMaker.title")}</h1>
+          <p className="mt-3 leading-relaxed text-muted-foreground">{t("graphPaperMaker.subtitle")}</p>
+        </header>
 
         <GraphPaperTool />
 
+        {isZh && (
+          <p className="mt-8 text-sm">
+            <Link href="/tools/graph-paper-maker/" className="text-primary hover:underline">
+              {t("fullGuide")}
+            </Link>
+          </p>
+        )}
+      </div>
+
+      {!isZh && (
+      <article className="max-w-4xl mx-auto px-4 pb-16 sm:px-6 lg:px-8 prose prose-slate dark:prose-invert">
         <h2>A Free Online Graph Paper Generator</h2>
         <p>
           Printable graph paper is one of the most-searched-for printouts on the web — students, engineers, artists, and journalers all need it, and buying a pad rarely gives you the exact spacing or grid style you want. This graph paper maker generates precise, vector-quality grids on demand, entirely in your browser. Unlike PDF-download sites that serve pre-baked files, every grid here is drawn live from your chosen parameters, so the spacing, margins, and colours are exactly what you set.
@@ -182,6 +196,7 @@ export default async function GraphPaperMakerPage({ params }: Props) {
           </Link>
         </div>
       </article>
+      )}
     </>
   );
 }

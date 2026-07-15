@@ -34,25 +34,24 @@ export interface GridOptions {
   staves: number; // music: number of 5-line staves
 }
 
-// Which extra control each type exposes (spacing/lineWidth/colors are universal).
+// Grid type order + which extra control each exposes. Labels/blurbs are i18n
+// (see the `graphPaper.types.*` messages); spacing/lineWidth/colours are universal.
 export const GRID_TYPES: {
   id: GridType;
-  label: string;
-  blurb: string;
   extra?: "majorEvery" | "angleStep" | "cycles" | "staves";
 }[] = [
-  { id: "square", label: "Square Grid", blurb: "Uniform squares — classic quad paper." },
-  { id: "dots", label: "Dot Grid", blurb: "Dots at each intersection — bullet journaling." },
-  { id: "lined", label: "Lined / Ruled", blurb: "Horizontal writing lines with a left margin." },
-  { id: "graph", label: "Graph (Multi-weight)", blurb: "Light minor grid with heavier major lines.", extra: "majorEvery" },
-  { id: "cross", label: "Cross Grid", blurb: "Small plus marks at each intersection." },
-  { id: "isometric", label: "Isometric", blurb: "Vertical + 30° lines for 3D drawing." },
-  { id: "triangle", label: "Triangle", blurb: "Equilateral triangle tessellation." },
-  { id: "hexagonal", label: "Hexagonal", blurb: "Honeycomb hexagons.", },
-  { id: "polar", label: "Polar", blurb: "Concentric rings + radial spokes.", extra: "angleStep" },
-  { id: "log", label: "Semi-log", blurb: "Linear × logarithmic decades.", extra: "cycles" },
-  { id: "music", label: "Music Staff", blurb: "Groups of five staff lines.", extra: "staves" },
-  { id: "cornell", label: "Cornell Notes", blurb: "Cue column + notes + summary layout." },
+  { id: "square" },
+  { id: "dots" },
+  { id: "lined" },
+  { id: "graph", extra: "majorEvery" },
+  { id: "cross" },
+  { id: "isometric" },
+  { id: "triangle" },
+  { id: "hexagonal" },
+  { id: "polar", extra: "angleStep" },
+  { id: "log", extra: "cycles" },
+  { id: "music", extra: "staves" },
+  { id: "cornell" },
 ];
 
 interface Rect {

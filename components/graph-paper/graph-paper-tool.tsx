@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { Printer, Download, ImageDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -70,6 +71,7 @@ const selectCls =
   "w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-ring";
 
 export function GraphPaperTool() {
+  const t = useTranslations("graphPaper");
   const svgRef = useRef<SVGSVGElement>(null);
 
   const [type, setType] = useState<GridType>("square");
@@ -180,20 +182,20 @@ export function GraphPaperTool() {
       {/* Controls */}
       <div className="space-y-5 rounded-xl border bg-card p-5">
         <div className="space-y-1.5">
-          <Label className="text-xs">Grid type</Label>
+          <Label className="text-xs">{t("gridType")}</Label>
           <select className={selectCls} value={type} onChange={(e) => setType(e.target.value as GridType)}>
             {GRID_TYPES.map((g) => (
               <option key={g.id} value={g.id}>
-                {g.label}
+                {t(`types.${g.id}.label`)}
               </option>
             ))}
           </select>
-          <p className="text-xs text-muted-foreground">{meta.blurb}</p>
+          <p className="text-xs text-muted-foreground">{t(`types.${type}.blurb`)}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1.5">
-            <Label className="text-xs">Paper</Label>
+            <Label className="text-xs">{t("paper")}</Label>
             <select className={selectCls} value={paper} onChange={(e) => setPaper(e.target.value as PaperSizeId)}>
               {PAPER_OPTIONS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -203,51 +205,51 @@ export function GraphPaperTool() {
             </select>
           </div>
           <div className="space-y-1.5">
-            <Label className="text-xs">Orientation</Label>
+            <Label className="text-xs">{t("orientation")}</Label>
             <select
               className={selectCls}
               value={orientation}
               onChange={(e) => setOrientation(e.target.value as Orientation)}
             >
-              <option value="portrait">Portrait</option>
-              <option value="landscape">Landscape</option>
+              <option value="portrait">{t("portrait")}</option>
+              <option value="landscape">{t("landscape")}</option>
             </select>
           </div>
         </div>
 
         {paper === "Custom" && (
           <div className="grid grid-cols-2 gap-3">
-            <NumberField label="Width" value={customW} onChange={setCustomW} min={20} max={1000} step={1} unit="mm" />
-            <NumberField label="Height" value={customH} onChange={setCustomH} min={20} max={1000} step={1} unit="mm" />
+            <NumberField label={t("width")} value={customW} onChange={setCustomW} min={20} max={1000} step={1} unit="mm" />
+            <NumberField label={t("height")} value={customH} onChange={setCustomH} min={20} max={1000} step={1} unit="mm" />
           </div>
         )}
 
-        <NumberField label="Spacing" value={spacing} onChange={setSpacing} min={1} max={30} step={0.5} unit="mm" />
-        <NumberField label="Margin" value={margin} onChange={setMargin} min={0} max={40} step={1} unit="mm" />
-        <NumberField label="Line width" value={lineWidth} onChange={setLineWidth} min={0.05} max={1} step={0.05} unit="mm" />
+        <NumberField label={t("spacing")} value={spacing} onChange={setSpacing} min={1} max={30} step={0.5} unit="mm" />
+        <NumberField label={t("margin")} value={margin} onChange={setMargin} min={0} max={40} step={1} unit="mm" />
+        <NumberField label={t("lineWidth")} value={lineWidth} onChange={setLineWidth} min={0.05} max={1} step={0.05} unit="mm" />
 
         {meta.extra === "majorEvery" && (
-          <NumberField label="Major line every" value={majorEvery} onChange={setMajorEvery} min={2} max={10} step={1} unit="cells" />
+          <NumberField label={t("majorEvery")} value={majorEvery} onChange={setMajorEvery} min={2} max={10} step={1} unit={t("cells")} />
         )}
         {meta.extra === "angleStep" && (
-          <NumberField label="Spoke angle" value={angleStep} onChange={setAngleStep} min={5} max={90} step={5} unit="°" />
+          <NumberField label={t("spokeAngle")} value={angleStep} onChange={setAngleStep} min={5} max={90} step={5} unit="°" />
         )}
         {meta.extra === "cycles" && (
-          <NumberField label="Decades" value={cycles} onChange={setCycles} min={1} max={6} step={1} />
+          <NumberField label={t("decades")} value={cycles} onChange={setCycles} min={1} max={6} step={1} />
         )}
         {meta.extra === "staves" && (
-          <NumberField label="Staves" value={staves} onChange={setStaves} min={1} max={20} step={1} />
+          <NumberField label={t("staves")} value={staves} onChange={setStaves} min={1} max={20} step={1} />
         )}
 
         <div className="grid grid-cols-3 gap-3">
-          <ColorField label="Line" value={lineColor} onChange={setLineColor} />
-          <ColorField label="Accent" value={accentColor} onChange={setAccentColor} />
-          <ColorField label="Background" value={bgColor} onChange={setBgColor} />
+          <ColorField label={t("colorLine")} value={lineColor} onChange={setLineColor} />
+          <ColorField label={t("colorAccent")} value={accentColor} onChange={setAccentColor} />
+          <ColorField label={t("colorBackground")} value={bgColor} onChange={setBgColor} />
         </div>
 
         <div className="flex flex-col gap-2 pt-1">
           <Button onClick={handlePrint} className="w-full">
-            <Printer className="size-4" /> Print / Save as PDF
+            <Printer className="size-4" /> {t("printPdf")}
           </Button>
           <div className="grid grid-cols-2 gap-2">
             <Button variant="outline" onClick={handleDownloadSvg}>
@@ -258,9 +260,7 @@ export function GraphPaperTool() {
             </Button>
           </div>
         </div>
-        <p className="text-xs text-muted-foreground">
-          100% in-browser — nothing is uploaded. Use Print → “Save as PDF” for vector-quality output.
-        </p>
+        <p className="text-xs text-muted-foreground">{t("privacyNote")}</p>
       </div>
 
       {/* Preview */}

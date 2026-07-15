@@ -3,7 +3,8 @@
 import { useTranslations } from "next-intl";
 import { EditorEmbed } from "@/components/editor-embed";
 import { Card, CardContent } from "@/components/ui/card";
-import { Layers, FileSpreadsheet, QrCode, FileDown, LayoutTemplate, Shield, MousePointerClick, Import, Printer } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { Layers, FileSpreadsheet, QrCode, FileDown, LayoutTemplate, Shield, MousePointerClick, Import, Printer, Grid3x3, Award, Tag, IdCard, ArrowRight } from "lucide-react";
 
 export function HomeContent() {
   const t = useTranslations("home");
@@ -22,6 +23,13 @@ export function HomeContent() {
     { icon: MousePointerClick, title: t("step2Title"), desc: t("step2Desc") },
     { icon: Import, title: t("step3Title"), desc: t("step3Desc") },
     { icon: Printer, title: t("step4Title"), desc: t("step4Desc") },
+  ];
+
+  const tools = [
+    { icon: Grid3x3, href: "/tools/graph-paper-maker/", title: t("toolGraphPaper"), desc: t("toolGraphPaperDesc") },
+    { icon: Award, href: "/tools/certificate-maker/", title: t("toolCertificate"), desc: t("toolCertificateDesc") },
+    { icon: Tag, href: "/tools/label-printing/", title: t("toolLabel"), desc: t("toolLabelDesc") },
+    { icon: IdCard, href: "/tools/name-badge-maker/", title: t("toolNameBadge"), desc: t("toolNameBadgeDesc") },
   ];
 
   return (
@@ -95,6 +103,36 @@ export function HomeContent() {
           <div className="mt-8 flex items-center gap-2 p-4 bg-primary/5 rounded-lg border border-primary/10">
             <Shield className="size-5 text-primary flex-shrink-0" />
             <p className="text-sm font-medium">{t("privacyBadge")}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* More tools */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-10">{t("moreToolsHeading")}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {tools.map((tool) => {
+              const Icon = tool.icon;
+              return (
+                <Link
+                  key={tool.href}
+                  href={tool.href}
+                  className="group flex flex-col gap-3 rounded-xl border bg-card p-5 transition-colors hover:border-primary/40 hover:bg-primary/5"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="size-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Icon className="size-5 text-primary" />
+                    </div>
+                    <ArrowRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">{tool.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{tool.desc}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
