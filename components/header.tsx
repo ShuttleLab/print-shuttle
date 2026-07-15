@@ -44,6 +44,11 @@ export default function Header() {
             <nav>
               <ul className="flex items-center gap-2 sm:gap-4">
                 <li>
+                  <Link href="/tools/graph-paper-maker" className="text-sm text-muted-foreground hover:text-foreground font-medium transition-colors">
+                    {t("common.graphPaper")}
+                  </Link>
+                </li>
+                <li>
                   <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground font-medium transition-colors">
                     {t("common.about")}
                   </Link>
