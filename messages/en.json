@@ -190,6 +190,10 @@
     "nameBadgeMaker": {
       "title": "Name Badge Maker — Free Printable ID Badge Designer",
       "subtitle": "Design and print name badges, ID cards, and event badges in your browser. Import Excel data to batch-generate badges with photos and barcodes."
+    },
+    "graphPaperMaker": {
+      "title": "Printable Graph Paper Maker — Free Grid, Dot & Isometric Paper PDF",
+      "subtitle": "Generate and print custom graph paper in your browser: square, dot, isometric, hexagonal, polar, semi-log, music, and Cornell layouts. Custom sizes, spacing, and colours. Export PDF, SVG, or PNG."
     }
   }
 }

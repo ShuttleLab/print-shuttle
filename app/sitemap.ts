@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/certificate-maker",
     "/tools/label-printing",
     "/tools/name-badge-maker",
+    "/tools/graph-paper-maker",
   ];
 
   const tools = toolPaths.map((path) => ({

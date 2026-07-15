@@ -171,6 +171,7 @@ export default async function CertificateMakerPage({ params }: Props) {
           <li><Link href="/">Print Shuttle Home — Full visual editor</Link></li>
           <li><Link href="/tools/label-printing/">Label Printing Templates</Link></li>
           <li><Link href="/tools/name-badge-maker/">Name Badge Maker</Link></li>
+          <li><Link href="/tools/graph-paper-maker/">Graph Paper Maker</Link></li>
           <li><Link href="/about/">About Print Shuttle</Link></li>
         </ul>
 

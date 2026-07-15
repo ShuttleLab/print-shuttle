@@ -170,6 +170,7 @@ export default async function LabelPrintingPage({ params }: Props) {
           <li><Link href="/">Print Shuttle Home — Full visual editor</Link></li>
           <li><Link href="/tools/certificate-maker/">Certificate Maker</Link></li>
           <li><Link href="/tools/name-badge-maker/">Name Badge Maker</Link></li>
+          <li><Link href="/tools/graph-paper-maker/">Graph Paper Maker</Link></li>
           <li><Link href="/about/">About Print Shuttle</Link></li>
         </ul>
 
